@@ -7,8 +7,7 @@ Example:
 <timer-days target-date="2017-12-30T16:40:00"></timer-days><br>
 ```
 
-
-You can specify the language in which the labels will be shown. By default they are in english, but you can use `lang` to choose between English (en), Spanish (es), French (fr), Italian (it), Portuguese (pt) or German (de).
+<br>You can specify the language in which the labels will be shown. By default they are in english, but you can use `lang` to choose between English (en), Spanish (es), French (fr), Italian (it), Portuguese (pt) or German (de).
 
 Example:
 ```
@@ -20,7 +19,7 @@ Example:
 <timer-days target-date="2017-11-20T16:40:00" lang="de"></timer-days><br>
 ```
 
-It is also posible to set the text to be displayed before and after the proper countdown, by using the `before` and `after` properties.
+<br>It is also posible to set the text to be displayed before and after the proper countdown, by using the `before` and `after` properties.
 
 Example:
 ```
