@@ -28,6 +28,7 @@ Example:
 <timer-days target-date="2018-11-20T16:40:00" before="You still have" after="before something very bad happens"></timer-days>
 ```
 
+<br>
 ### Styling
 The following custom properties are available for styling:
 
