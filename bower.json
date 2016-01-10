@@ -17,8 +17,7 @@
   "homepage": "https://github.com/Zevesh/timer-days/",
   "ignore": [
     "/.*",
-    "/test/",
-    "/demo/"
+    "/test/"
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0",
