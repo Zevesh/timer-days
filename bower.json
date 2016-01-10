@@ -13,8 +13,8 @@
     "countdown"
   ],
   "main": "timer-days.html",
-  "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/<USERNAME>/seed-element/",
+  "license": "https://github.com/Zevesh/timer-days/blob/master/LICENSE",
+  "homepage": "https://github.com/Zevesh/timer-days/",
   "ignore": [
     "/.*",
     "/test/",
