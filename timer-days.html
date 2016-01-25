@@ -124,7 +124,7 @@ Custom property | Description | Default
          *  Highly recommended to use the "yyyy-mm-ddThh:mm:ss" format
          *  to specify when using the component. 
          */
-        targetDate: Date,
+        targetDate: String,
 
         /** 
          *  Text to be shown before the count of time. 
@@ -153,6 +153,8 @@ Custom property | Description | Default
           value: "en"
         },
 
+        /** Target date after the arrangements for the  */
+        _realTarget: Date,
 
         /** Number of entire days until target date. */
         _days: Number,
@@ -196,8 +198,10 @@ Custom property | Description | Default
 
       /** Adjusts the target date to the browser's timezone. */
       _adjustToTimezone: function() {
-        var offset = this.targetDate.getTimezoneOffset();
-        this.targetDate = new Date(this.targetDate.getTime() + (60000 * offset));
+        this.targetDate += "Z"; //To get Zulu hour, common for all browsers.
+        var preProcessingDate = new Date(this.targetDate);
+        var offset = preProcessingDate.getTimezoneOffset();
+        this._realTarget = new Date(preProcessingDate.getTime() + (60000 * offset));
       },
 
       /** Choses the possible words to display according with the selected language. */
@@ -263,7 +267,7 @@ Custom property | Description | Default
          */
       _calculateGap: function(){
         var startingDate = new Date();
-        var diffTimes = this.targetDate - startingDate;
+        var diffTimes = this._realTarget - startingDate;
         if (diffTimes >= 0){
           this._days = Math.floor(diffTimes / 86400000);
           var noDays = diffTimes % 86400000;
@@ -272,6 +276,11 @@ Custom property | Description | Default
           this._mins = Math.floor(noHours / 60000);
           var noMins = noHours % 60000;
           this._secs = Math.floor(noMins / 1000) + 1;
+        } else {
+          this._days = 0;
+          this._hours = 0;
+          this._mins = 0;
+          this._secs = 0;
         }
       },
 
