@@ -1,6 +1,6 @@
 {
   "name": "timer-days",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [
     "Alejandro Acebes Cabrera <alejandroacb@gmail.com>"
   ],
@@ -17,13 +17,11 @@
   "homepage": "https://github.com/Zevesh/timer-days/",
   "ignore": [
     "/.*",
-    "/test/",
-    "/demo/"
+    "/test/"
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0",
     "paper-styles": "polymerelements/paper-styles#^1.0.0",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.0.3"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

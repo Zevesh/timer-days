@@ -3,35 +3,35 @@
 <link rel="import" href="../paper-styles/shadow.html">
 
 <!--
-This component will display a countdown expressed in days, hours, minutes and seconds until 
-a deadline date. More than one timer can be displayed at once.
+This component will display a countdown expressed in days, hours, minutes and seconds until a deadline date. More than one timer can be displayed at once.
 
 Example:
+```
 <timer-days target-date="2017-11-20T16:40:00"></timer-days><br>
 <timer-days target-date="2017-12-30T16:40:00"></timer-days><br>
+```
 
-
-You can specify the language in which the labels will be shown. By default they are in english, 
-but you can use `lang` to choose between English (en), Spanish (es), French (fr), Italian (it),
-Portuguese (pt) or German (de).
+You can specify the language in which the labels will be shown. By default they are in english, but you can use `lang` to choose between English (en), Spanish (es), French (fr), Italian (it), Portuguese (pt) or German (de).
 
 Example:
+```
 <timer-days target-date="2017-11-20T16:40:00"></timer-days><br>
 <timer-days target-date="2017-11-20T16:40:00" lang="es"></timer-days><br>
 <timer-days target-date="2017-11-20T16:40:00" lang="fr"></timer-days><br>
 <timer-days target-date="2017-11-20T16:40:00" lang="pt"></timer-days><br>
 <timer-days target-date="2017-11-20T16:40:00" lang="it"></timer-days><br>
 <timer-days target-date="2017-11-20T16:40:00" lang="de"></timer-days><br>
+```
 
 
-It is also posible to set the text to be displayed before and after the proper countdown, by 
-using the `before` and `after` properties.
+It is also posible to set the text to be displayed before and after the proper countdown, by using the `before` and `after` properties.
 
 Example:
+```
 <timer-days target-date="2018-11-20T16:40:00" before="Your planet will be destroyed in about"></timer-days><br>
 <timer-days target-date="2018-11-20T16:40:00" after="until it finds you"></timer-days><br>
 <timer-days target-date="2018-11-20T16:40:00" before="You still have" after="before something very bad happens"></timer-days>
-
+```
 
 ### Styling
 The following custom properties are available for styling:
@@ -120,7 +120,7 @@ Custom property | Description | Default
          *  Highly recommended to use the "yyyy-mm-ddThh:mm:ss" format
          *  to specify when using the component. 
          */
-        targetDate: Date,
+        targetDate: String,
 
         /** 
          *  Text to be shown before the count of time. 
@@ -149,6 +149,8 @@ Custom property | Description | Default
           value: "en"
         },
 
+        /** Target date after the arrangements for the  */
+        _realTarget: Date,
 
         /** Number of entire days until target date. */
         _days: Number,
@@ -185,19 +187,21 @@ Custom property | Description | Default
 
       /** Calculates the values for all the properties and starts the timer. */
       ready: function(){
-        this.adjustToTimezone();
-        this.adaptLanguage();
-        this.updateTimer();
+        this._adjustToTimezone();
+        this._adaptLanguage();
+        this._updateTimer();
       },
 
       /** Adjusts the target date to the browser's timezone. */
-      adjustToTimezone: function() {
-        var offset = this.targetDate.getTimezoneOffset();
-        this.targetDate = new Date(this.targetDate.getTime() + (60000 * offset));
+      _adjustToTimezone: function() {
+        this.targetDate += "Z"; //To get Zulu hour, common for all browsers.
+        var preProcessingDate = new Date(this.targetDate);
+        var offset = preProcessingDate.getTimezoneOffset();
+        this._realTarget = new Date(preProcessingDate.getTime() + (60000 * offset));
       },
 
       /** Choses the possible words to display according with the selected language. */
-      adaptLanguage: function(){
+      _adaptLanguage: function(){
         switch (this.lang){
           case "es":{
             this._wordDay = ["día", "días"];
@@ -247,19 +251,19 @@ Custom property | Description | Default
        *  Manages an interation of the timer to modify what is displayed and prepare 
        *  the next iteration one second after it has ended.
        */
-      updateTimer: function(){
-        this.calculateGap();
-        this._chosenWords = this.wordsToDisplay();
-        this.async(this.updateTimer, 1000); 
+      _updateTimer: function(){
+        this._calculateGap();
+        this._chosenWords = this._wordsToDisplay();
+        this.async(this._updateTimer, 1000); 
       },
 
         /** 
          *  Calculates the number of days, hours, minutes and seconds from 
          *  the current date to the target. 
          */
-      calculateGap: function(){
+      _calculateGap: function(){
         var startingDate = new Date();
-        var diffTimes = this.targetDate - startingDate;
+        var diffTimes = this._realTarget - startingDate;
         if (diffTimes >= 0){
           this._days = Math.floor(diffTimes / 86400000);
           var noDays = diffTimes % 86400000;
@@ -268,6 +272,11 @@ Custom property | Description | Default
           this._mins = Math.floor(noHours / 60000);
           var noMins = noHours % 60000;
           this._secs = Math.floor(noMins / 1000) + 1;
+        } else {
+          this._days = 0;
+          this._hours = 0;
+          this._mins = 0;
+          this._secs = 0;
         }
       },
 
@@ -278,7 +287,7 @@ Custom property | Description | Default
        *  @return {array} An array with the string that must be showed. 
        *    The order is days, hours, minutes and seconds.
        */
-      wordsToDisplay: function(){
+      _wordsToDisplay: function(){
         return [((this._days != 1) ? this._wordDay[1] : this._wordDay[0]), 
           ((this._hours != 1) ? this._wordHour[1] : this._wordHour[0]), 
           ((this._mins != 1) ? this._wordMin[1] : this._wordMin[0]), 
