@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Timer-days by Zevesh</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Timer-days</h1>
+        <h2>A Polymer component to display a countdown expressed in days, hours, minutes and seconds until a deadline date.</h2>
+        <a href="https://github.com/Zevesh/timer-days" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h2>
+<a id="timer-days" class="anchor" href="#timer-days" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>&lt;timer-days&gt;</h2>
+
+<p>This component will display a countdown expressed in days, hours, minutes and seconds until a deadline date. More than one timer can be displayed at once.</p>
+
+<p>Example:</p>
+
+<pre><code>&lt;timer-days target-date="2017-11-20T16:40:00"&gt;&lt;/timer-days&gt;&lt;br&gt;
+&lt;timer-days target-date="2017-12-30T16:40:00"&gt;&lt;/timer-days&gt;&lt;br&gt;
+</code></pre>
+
+<p><br>You can specify the language in which the labels will be shown. By default they are in english, but you can use <code>lang</code> to choose between English (en), Spanish (es), French (fr), Italian (it), Portuguese (pt) or German (de).</p>
+
+<p>Example:</p>
+
+<pre><code>&lt;timer-days target-date="2017-11-20T16:40:00"&gt;&lt;/timer-days&gt;&lt;br&gt;
+&lt;timer-days target-date="2017-11-20T16:40:00" lang="es"&gt;&lt;/timer-days&gt;&lt;br&gt;
+&lt;timer-days target-date="2017-11-20T16:40:00" lang="fr"&gt;&lt;/timer-days&gt;&lt;br&gt;
+&lt;timer-days target-date="2017-11-20T16:40:00" lang="pt"&gt;&lt;/timer-days&gt;&lt;br&gt;
+&lt;timer-days target-date="2017-11-20T16:40:00" lang="it"&gt;&lt;/timer-days&gt;&lt;br&gt;
+&lt;timer-days target-date="2017-11-20T16:40:00" lang="de"&gt;&lt;/timer-days&gt;&lt;br&gt;
+</code></pre>
+
+<p><br>It is also posible to set the text to be displayed before and after the proper countdown, by using the <code>before</code> and <code>after</code> properties.</p>
+
+<p>Example:</p>
+
+<pre><code>&lt;timer-days target-date="2018-11-20T16:40:00" before="Your planet will be destroyed in about"&gt;&lt;/timer-days&gt;&lt;br&gt;
+&lt;timer-days target-date="2018-11-20T16:40:00" after="until it finds you"&gt;&lt;/timer-days&gt;&lt;br&gt;
+&lt;timer-days target-date="2018-11-20T16:40:00" before="You still have" after="before something very bad happens"&gt;&lt;/timer-days&gt;
+</code></pre>
+
+<p><br></p>
+
+<h3>
+<a id="styling" class="anchor" href="#styling" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Styling</h3>
+
+<p>The following custom properties are available for styling:</p>
+
+<table>
+<thead>
+<tr>
+<th>Custom property</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--timer-days-background-color</code></td>
+<td>The timer-days background-color</td>
+<td><code>#FFD54F</code></td>
+</tr>
+<tr>
+<td><code>--timer-days-border-color</code></td>
+<td>The timer-days border-color</td>
+<td><code>#212121</code></td>
+</tr>
+<tr>
+<td><code>--timer-days-font-color</code></td>
+<td>The timer-days font color</td>
+<td><code>#212121</code></td>
+</tr>
+<tr>
+<td><code>--timer-days-hover-background-color</code></td>
+<td>The timer-days background-color when mouse is over it</td>
+<td><code>#4E342E</code></td>
+</tr>
+<tr>
+<td><code>--timer-days-hover-border-color</code></td>
+<td>The timer-days border-color when mouse is over it</td>
+<td><code>#CFD8DC</code></td>
+</tr>
+<tr>
+<td><code>--timer-days-hover-font-color</code></td>
+<td>The timer-days font color when mouse is over it</td>
+<td><code>#CFD8DC</code></td>
+</tr>
+<tr>
+<td><code>--timer-days-font-description-size</code></td>
+<td>The timer-days font size for the text before an after the timer</td>
+<td><code>15px</code></td>
+</tr>
+<tr>
+<td><code>--timer-days-font-number-size</code></td>
+<td>The timer-days font size for the numbers</td>
+<td><code>35px</code></td>
+</tr>
+<tr>
+<td><code>--timer-days-font-text-size</code></td>
+<td>The timer-days font size for the words explaining each number</td>
+<td><code>18px</code></td>
+</tr>
+</tbody>
+</table>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/Zevesh/timer-days/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/Zevesh/timer-days/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/Zevesh/timer-days"></a> is maintained by <a href="https://github.com/Zevesh">Zevesh</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
