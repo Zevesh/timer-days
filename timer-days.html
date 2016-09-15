@@ -287,7 +287,7 @@ Custom property | Description | Default
           var noHours = noDays % 3600000;
           this._mins = Math.floor(noHours / 60000);
           var noMins = noHours % 60000;
-          this._secs = Math.floor(noMins / 1000) + 1;
+          this._secs = Math.floor(noMins / 1000);
         } else {
           this._days = 0;
           this._hours = 0;
