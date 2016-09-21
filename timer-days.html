@@ -136,7 +136,10 @@ Custom property | Description | Default
          *  Highly recommended to use the "yyyy-mm-ddThh:mm:ss" format
          *  to specify when using the component. 
          */
-        targetDate: String,
+        targetDate: {
+          type: String,
+          observer: 'targetDateChanged'
+        },
 
         /** 
          *  Text to be shown before the count of time. 
@@ -202,7 +205,7 @@ Custom property | Description | Default
       //Functions:
 
       /** Calculates the values for all the properties and starts the timer. */
-      ready: function(){
+      targetDateChanged: function(){
         this._adjustToTimezone();
         this._adaptLanguage();
         this._updateTimer();
@@ -210,8 +213,8 @@ Custom property | Description | Default
 
       /** Adjusts the target date to the browser's timezone. */
       _adjustToTimezone: function() {
-        this.targetDate += "Z"; //To get Zulu hour, common for all browsers.
-        var preProcessingDate = new Date(this.targetDate);
+        //To get Zulu hour, common for all browsers.
+        var preProcessingDate = new Date(this.targetDate + "Z");
         var offset = preProcessingDate.getTimezoneOffset();
         this._realTarget = new Date(preProcessingDate.getTime() + (60000 * offset));
       },
