@@ -2,8 +2,7 @@
 <link rel="import" href="../paper-styles/shadow.html">
 
 <!--
-This component will display a countdown expressed in days, hours, minutes and seconds until a deadline date. More than one timer can be displayed at once. More than one timer can be displayed at once.
-
+This component will display a countdown expressed in days, hours, minutes and seconds until a deadline date. More than one timer can be displayed at once.
 
 Example:
 ```
@@ -59,56 +58,57 @@ Custom property | Description | Default
 -->
 
 <dom-module id="timer-days">
-  <style>
-    :host {
-      min-width: 400px;
-      display: block;
-      text-align: center; 
-      padding-top: 5px;
-      padding-bottom: 5px;
-
-      background-color: var(--timer-days-background-color, #FFD54F);
-      border: 1px solid var(--timer-days-border-color, #212121);
-      color: var(--timer-days-font-color, #212121);
-      @apply(--shadow-elevation-4dp);
-      
-      transition-property: background-color, border, color;
-      transition-duration: 300ms;
-      transition-timing-function: linear; 
-
-      /*For Safari*/
-      -webkit-transition-property: background-color, border, color;
-      -webkit-transition-duration: 300ms;
-      -webkit-transition-timing-function: linear; 
-    }
-
-    :host(:hover) {
-      background-color: var(--timer-days-hover-background-color, #4E342E);
-      border: 1px solid var(--timer-days-hover-border-color, #CFD8DC);
-      color: var(--timer-days-hover-font-color, #CFD8DC);
-    }
-
-    .description {
-      margin: 5px 0px 5px 0px;
-      font-size: var(--timer-days-font-description-size, 15px)
-    }
-
-    .number{
-      font-size: var(--timer-days-font-number-size, 35px);
-    }
-
-    .text{
-      font-size: var(--timer-days-font-text-size, 18px); 
-    }
-
-    .inline {
-      display: inline-block;
-      text-align: center;
-      margin: 1px 10px 6px 10px;
-    }
-  </style>
 
   <template>
+    <style>
+      :host {
+        min-width: 400px;
+        display: block;
+        text-align: center; 
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        background-color: var(--timer-days-background-color, #FFD54F);
+        border: 1px solid var(--timer-days-border-color, #212121);
+        color: var(--timer-days-font-color, #212121);
+        @apply --shadow-elevation-4dp;
+        
+        transition-property: background-color, border, color;
+        transition-duration: 300ms;
+        transition-timing-function: linear; 
+
+        /*For Safari*/
+        -webkit-transition-property: background-color, border, color;
+        -webkit-transition-duration: 300ms;
+        -webkit-transition-timing-function: linear; 
+      }
+
+      :host(:hover) {
+        background-color: var(--timer-days-hover-background-color, #4E342E);
+        border: 1px solid var(--timer-days-hover-border-color, #CFD8DC);
+        color: var(--timer-days-hover-font-color, #CFD8DC);
+      }
+
+      .description {
+        margin: 5px 0px 5px 0px;
+        font-size: var(--timer-days-font-description-size, 15px);
+      }
+
+      .number{
+        font-size: var(--timer-days-font-number-size, 35px);
+      }
+
+      .text{
+        font-size: var(--timer-days-font-text-size, 18px);
+      }
+
+      .inline {
+        display: inline-block;
+        text-align: center;
+        margin: 1px 10px 6px 10px;
+      }
+    </style>
+
     <p class="description">{{before}}</p>
     <span class="inline"><span class="number">{{_days}}</span><br><span class="text">{{_chosenWords.0}}</span></span>
     <span class="inline"><span class="number">{{_hours}}</span><br><span class="text">{{_chosenWords.1}}</span></span>
@@ -206,6 +206,7 @@ Custom property | Description | Default
 
       /** Adjusts the target date to the browser's timezone. */
       _adjustToTimezone: function() {
+        console.log(this.targetDate);
         //To get Zulu hour, common for all browsers.
         var preProcessingDate = new Date(this.targetDate + "Z");
         var offset = preProcessingDate.getTimezoneOffset();
@@ -266,7 +267,7 @@ Custom property | Description | Default
       _updateTimer: function(){
         this._calculateGap();
         this._chosenWords = this._wordsToDisplay();
-        this.async(this._updateTimer, 1000); 
+        setTimeout(() => this._updateTimer(), 500);
       },
 
         /** 
